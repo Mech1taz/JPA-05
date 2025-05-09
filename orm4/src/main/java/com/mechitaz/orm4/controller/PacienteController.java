@@ -34,6 +34,12 @@ public class PacienteController {
     }
     @PostMapping
     public ResponseEntity<Paciente> postPaciente(@RequestBody Paciente paciente){
-        return new ResponseEntity<>( pacienteService.save(paciente),HttpStatus.ACCEPTED);
+        Paciente nuevo=pacienteService.save(paciente);
+        if(nuevo==null){
+            return new ResponseEntity<>( pacienteService.save(paciente),HttpStatus.ACCEPTED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.IM_USED);
+        }
+        
     }
 }
